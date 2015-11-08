@@ -2,9 +2,7 @@ var http = require('http');
 var Twitter = require('twitter');
 const PORT=3000; 
 
-function handleRequest(request, response){
-    response.end('It Works!! Path Hit: ' + request.url);
-}
+
 
 var server = http.createServer(handleRequest);
 
@@ -15,22 +13,29 @@ server.listen(PORT, function(){
 
 function twitStream () {
 
-   
   var client = new Twitter({
-    consumer_key: '',
-    consumer_secret: '',
-    access_token_key: '',
-    access_token_secret: ''
+    consumer_key: '3RG5azgnrtq2czFImY285cH5r',
+    consumer_secret: '7mGEjD6YAnCdoVa5mpC47FPDvX0QTrqFR2DnUTWQm4fUuc7y46',
+    access_token_key: '192961792-YM83W8U1WV4fiUAVZnjnfZ8K6OHa5A2mznH1GB1R',
+    access_token_secret: 'hxaUdDCrnYT3PWsIT4fgRwDkT9gciUkSAXFynnuZbUVeu'
   });
 
-  client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
+  client.stream('statuses/filter', {track: 'beyonce'}, function(stream) {
     stream.on('data', function(tweet) {
       console.log(tweet.text);
     });
      
     stream.on('error', function(error) {
+      console.log('error ',error)
       throw error;
     });
   });
 
+}
+
+twitStream()
+
+function handleRequest(request, response){
+    response.write ("test\n");
+    response.end('It Works!! Path Hit: ' + request.url);
 }
